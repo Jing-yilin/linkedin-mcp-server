@@ -1,5 +1,5 @@
 {
-  "name": "linkedin-mcp-server",
+  "name": "@yilin-jing/linkedin-mcp",
   "version": "1.0.0",
   "description": "MCP server for LinkedIn API via HarvestAPI - Access LinkedIn data through a unified API interface",
   "author": "yilin",
@@ -7,7 +7,7 @@
   "main": "build/index.js",
   "type": "commonjs",
   "bin": {
-    "linkedin-mcp-server": "build/index.js"
+    "linkedin-mcp": "build/index.js"
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
