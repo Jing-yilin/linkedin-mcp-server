@@ -1,0 +1,59 @@
+{
+  "name": "linkedin-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for LinkedIn API via HarvestAPI - Access LinkedIn data through a unified API interface",
+  "author": "yilin",
+  "license": "MIT",
+  "main": "build/index.js",
+  "type": "commonjs",
+  "bin": {
+    "linkedin-mcp-server": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "dev": "npm run build && node build/index.js",
+    "prepare": "npm run build",
+    "test": "bun test"
+  },
+  "files": [
+    "build/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "server",
+    "linkedin",
+    "api",
+    "social",
+    "data",
+    "harvest-api",
+    "harvestapi",
+    "claude",
+    "llm",
+    "model-context-protocol",
+    "profile",
+    "company",
+    "jobs"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.2",
+    "axios": "^1.11.0",
+    "https-proxy-agent": "^7.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jing-yilin/linkedin-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jing-yilin/linkedin-mcp-server/issues"
+  },
+  "homepage": "https://github.com/Jing-yilin/linkedin-mcp-server#readme"
+}
