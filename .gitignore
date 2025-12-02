@@ -5,3 +5,7 @@ dist/
 .env
 .env.local
 .DS_Store
+
+# npm pack artifacts
+package/
+*.tgz

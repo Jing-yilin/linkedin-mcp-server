@@ -12,6 +12,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { HttpsProxyAgent } from 'https-proxy-agent';
+import { JsonResponseHandler } from './jsonUtils.js';
 
 /**
  * Interface definitions for HarvestAPI LinkedIn responses
@@ -256,6 +257,10 @@ class LinkedInAPIMCPServer {
                   description: 'Include detailed about section',
                   default: false,
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -319,6 +324,10 @@ class LinkedInAPIMCPServer {
                   description: 'Page number for pagination',
                   default: 1,
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: ['search'],
             },
@@ -355,6 +364,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'Pagination token for next page',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -387,6 +400,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'Pagination token for next page',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -414,6 +431,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'Pagination token for next page',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -437,6 +458,10 @@ class LinkedInAPIMCPServer {
                 search: {
                   type: 'string',
                   description: 'Company name to search (returns most relevant result)',
+                },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
                 },
               },
               required: [],
@@ -468,6 +493,10 @@ class LinkedInAPIMCPServer {
                   type: 'integer',
                   description: 'Page number for pagination',
                   default: 1,
+                },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
                 },
               },
               required: ['search'],
@@ -505,6 +534,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'Pagination token for next page',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -524,6 +557,10 @@ class LinkedInAPIMCPServer {
                 url: {
                   type: 'string',
                   description: 'LinkedIn job URL',
+                },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
                 },
               },
               required: [],
@@ -601,6 +638,10 @@ class LinkedInAPIMCPServer {
                   description: 'Page number for pagination',
                   default: 1,
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -616,6 +657,10 @@ class LinkedInAPIMCPServer {
                 url: {
                   type: 'string',
                   description: 'LinkedIn post URL (required)',
+                },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
                 },
               },
               required: ['url'],
@@ -678,6 +723,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'Pagination token for next page',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -706,6 +755,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'Pagination token (required for relevance sort on page > 1)',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: ['post'],
             },
@@ -724,6 +777,10 @@ class LinkedInAPIMCPServer {
                   type: 'integer',
                   description: 'Page number for pagination',
                   default: 1,
+                },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
                 },
               },
               required: ['post'],
@@ -745,6 +802,10 @@ class LinkedInAPIMCPServer {
                   type: 'string',
                   description: 'LinkedIn group ID',
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: [],
             },
@@ -764,6 +825,10 @@ class LinkedInAPIMCPServer {
                   description: 'Page number for pagination',
                   default: 1,
                 },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
+                },
               },
               required: ['search'],
             },
@@ -779,6 +844,10 @@ class LinkedInAPIMCPServer {
                 search: {
                   type: 'string',
                   description: 'Location text to search for Geo ID',
+                },
+                raw_data_save_dir: {
+                  type: 'string',
+                  description: 'Directory path to save raw response data',
                 },
               },
               required: ['search'],
@@ -825,7 +894,7 @@ class LinkedInAPIMCPServer {
 
           // Post endpoints
           case 'get_post':
-            return await this.getPost(args.url as string);
+            return await this.getPost(args as Record<string, any>);
           case 'search_posts':
             return await this.searchPosts(args as Record<string, any>);
           case 'get_post_comments':
@@ -841,7 +910,7 @@ class LinkedInAPIMCPServer {
 
           // Geo ID endpoint
           case 'search_geo_id':
-            return await this.searchGeoId(args.search as string);
+            return await this.searchGeoId(args as Record<string, any>);
 
           default:
             throw new McpError(
@@ -884,15 +953,11 @@ class LinkedInAPIMCPServer {
     }
   }
 
-  private formatResponse(data: any): CallToolResult {
-    return {
-      content: [
-        {
-          type: 'text',
-          text: JSON.stringify(data, null, 2),
-        },
-      ],
-    };
+  // JSON response handler for formatting and limiting responses
+  private jsonHandler = new JsonResponseHandler({ maxItemsForContext: 10 });
+
+  private formatResponse(data: any, options?: { rawDataSaveDir?: string; toolName?: string; params?: Record<string, any> }): CallToolResult {
+    return this.jsonHandler.formatResponse(data, options);
   }
 
   // Profile methods
@@ -909,7 +974,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/profile', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_profile', params: args });
   }
 
   private async searchProfiles(args: Record<string, any>): Promise<CallToolResult> {
@@ -929,7 +994,7 @@ class LinkedInAPIMCPServer {
     if (args.page) params.page = args.page;
 
     const data = await this.makeRequest('/profile-search', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'search_profiles', params: args });
   }
 
   private async getProfilePosts(args: Record<string, any>): Promise<CallToolResult> {
@@ -947,7 +1012,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/profile-posts', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_profile_posts', params: args });
   }
 
   private async getProfileComments(args: Record<string, any>): Promise<CallToolResult> {
@@ -964,7 +1029,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/profile-comments', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_profile_comments', params: args });
   }
 
   private async getProfileReactions(args: Record<string, any>): Promise<CallToolResult> {
@@ -980,7 +1045,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/profile-reactions', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_profile_reactions', params: args });
   }
 
   // Company methods
@@ -996,7 +1061,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/company', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_company', params: args });
   }
 
   private async searchCompanies(args: Record<string, any>): Promise<CallToolResult> {
@@ -1008,7 +1073,7 @@ class LinkedInAPIMCPServer {
     if (args.page) params.page = args.page;
 
     const data = await this.makeRequest('/company-search', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'search_companies', params: args });
   }
 
   private async getCompanyPosts(args: Record<string, any>): Promise<CallToolResult> {
@@ -1026,7 +1091,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/company-posts', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_company_posts', params: args });
   }
 
   // Job methods
@@ -1041,7 +1106,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/job', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_job', params: args });
   }
 
   private async searchJobs(args: Record<string, any>): Promise<CallToolResult> {
@@ -1064,13 +1129,13 @@ class LinkedInAPIMCPServer {
     if (args.page) params.page = args.page;
 
     const data = await this.makeRequest('/job-search', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'search_jobs', params: args });
   }
 
   // Post methods
-  private async getPost(url: string): Promise<CallToolResult> {
-    const data = await this.makeRequest('/post', { url });
-    return this.formatResponse(data);
+  private async getPost(args: Record<string, any>): Promise<CallToolResult> {
+    const data = await this.makeRequest('/post', { url: args.url });
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_post', params: args });
   }
 
   private async searchPosts(args: Record<string, any>): Promise<CallToolResult> {
@@ -1090,7 +1155,7 @@ class LinkedInAPIMCPServer {
     if (args.paginationToken) params.paginationToken = args.paginationToken;
 
     const data = await this.makeRequest('/post-search', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'search_posts', params: args });
   }
 
   private async getPostComments(args: Record<string, any>): Promise<CallToolResult> {
@@ -1101,7 +1166,7 @@ class LinkedInAPIMCPServer {
     if (args.paginationToken) params.paginationToken = args.paginationToken;
 
     const data = await this.makeRequest('/post-comments', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_post_comments', params: args });
   }
 
   private async getPostReactions(args: Record<string, any>): Promise<CallToolResult> {
@@ -1110,7 +1175,7 @@ class LinkedInAPIMCPServer {
     if (args.page) params.page = args.page;
 
     const data = await this.makeRequest('/post-reactions', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_post_reactions', params: args });
   }
 
   // Group methods
@@ -1125,7 +1190,7 @@ class LinkedInAPIMCPServer {
     }
 
     const data = await this.makeRequest('/group', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'get_group', params: args });
   }
 
   private async searchGroups(args: Record<string, any>): Promise<CallToolResult> {
@@ -1134,13 +1199,13 @@ class LinkedInAPIMCPServer {
     if (args.page) params.page = args.page;
 
     const data = await this.makeRequest('/group-search', params);
-    return this.formatResponse(data);
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'search_groups', params: args });
   }
 
   // Geo ID method
-  private async searchGeoId(search: string): Promise<CallToolResult> {
-    const data = await this.makeRequest('/geo-id-search', { search });
-    return this.formatResponse(data);
+  private async searchGeoId(args: Record<string, any>): Promise<CallToolResult> {
+    const data = await this.makeRequest('/geo-id-search', { search: args.search });
+    return this.formatResponse(data, { rawDataSaveDir: args.raw_data_save_dir, toolName: 'search_geo_id', params: args });
   }
 
   async run(): Promise<void> {
