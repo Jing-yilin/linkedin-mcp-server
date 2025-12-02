@@ -188,9 +188,6 @@ class LinkedInAPIMCPServer {
   constructor() {
     // Get API key from environment
     this.apiKey = process.env.HARVESTAPI_API_KEY || process.env.LINKEDIN_API_KEY || '';
-    if (!this.apiKey) {
-      console.error('Warning: HARVESTAPI_API_KEY or LINKEDIN_API_KEY environment variable not set');
-    }
 
     this.server = new Server(
       {
@@ -219,7 +216,6 @@ class LinkedInAPIMCPServer {
     if (proxyUrl) {
       axiosConfig.httpsAgent = new HttpsProxyAgent(proxyUrl);
       axiosConfig.proxy = false;
-      console.error('Using proxy:', proxyUrl);
     }
 
     this.apiClient = axios.create(axiosConfig);
@@ -1150,7 +1146,6 @@ class LinkedInAPIMCPServer {
   async run(): Promise<void> {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    console.error('LinkedIn MCP server running on stdio');
   }
 }
 
