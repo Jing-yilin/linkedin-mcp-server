@@ -246,7 +246,7 @@ class LinkedInAPIMCPServer {
                 profileId: { type: 'string', description: 'LinkedIn profile ID' },
                 findEmail: { type: 'boolean', description: 'Find email address for the profile', default: false },
                 includeAboutProfile: { type: 'boolean', description: 'Include detailed about section', default: false },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum items in arrays (default: 5)', default: 5 },
               },
               required: [],
@@ -269,7 +269,7 @@ class LinkedInAPIMCPServer {
                 geoId: { type: 'string', description: 'Filter by LinkedIn Geo ID' },
                 industryId: { type: 'string', description: 'Filter by industry ID' },
                 page: { type: 'integer', description: 'Page number', default: 1 },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum results (default: 10)', default: 10 },
               },
               required: ['search'],
@@ -287,7 +287,7 @@ class LinkedInAPIMCPServer {
                 postedLimit: { type: 'string', description: 'Filter by time: 24h, week, month', enum: ['24h', 'week', 'month'] },
                 page: { type: 'integer', description: 'Page number', default: 1 },
                 paginationToken: { type: 'string', description: 'Pagination token' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum posts (default: 10)', default: 10 },
               },
               required: [],
@@ -304,7 +304,7 @@ class LinkedInAPIMCPServer {
                 postedLimit: { type: 'string', description: 'Filter by time: 24h, week, month', enum: ['24h', 'week', 'month'] },
                 page: { type: 'integer', description: 'Page number', default: 1 },
                 paginationToken: { type: 'string', description: 'Pagination token' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum comments (default: 10)', default: 10 },
               },
               required: [],
@@ -320,7 +320,7 @@ class LinkedInAPIMCPServer {
                 profileId: { type: 'string', description: 'LinkedIn profile ID (faster)' },
                 page: { type: 'integer', description: 'Page number', default: 1 },
                 paginationToken: { type: 'string', description: 'Pagination token' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum reactions (default: 10)', default: 10 },
               },
               required: [],
@@ -335,7 +335,7 @@ class LinkedInAPIMCPServer {
                 url: { type: 'string', description: 'LinkedIn company URL' },
                 universalName: { type: 'string', description: 'Company universal name (found in URL)' },
                 search: { type: 'string', description: 'Company name to search' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
               },
               required: [],
             },
@@ -351,7 +351,7 @@ class LinkedInAPIMCPServer {
                 geoId: { type: 'string', description: 'Filter by LinkedIn Geo ID' },
                 companySize: { type: 'string', description: 'Filter by size: 1-10, 11-50, 51-200, 201-500, 501-1000, 1001-5000, 5001-10000, 10001+' },
                 page: { type: 'integer', description: 'Page number', default: 1 },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum results (default: 10)', default: 10 },
               },
               required: ['search'],
@@ -369,7 +369,7 @@ class LinkedInAPIMCPServer {
                 postedLimit: { type: 'string', description: 'Filter by time: 24h, week, month', enum: ['24h', 'week', 'month'] },
                 page: { type: 'integer', description: 'Page number', default: 1 },
                 paginationToken: { type: 'string', description: 'Pagination token' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum posts (default: 10)', default: 10 },
               },
               required: [],
@@ -383,7 +383,7 @@ class LinkedInAPIMCPServer {
               properties: {
                 jobId: { type: 'string', description: 'LinkedIn job ID' },
                 url: { type: 'string', description: 'LinkedIn job URL' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
               },
               required: [],
             },
@@ -409,7 +409,7 @@ class LinkedInAPIMCPServer {
                 under10Applicants: { type: 'boolean', description: 'Filter jobs with under 10 applicants' },
                 easyApply: { type: 'boolean', description: 'Filter Easy Apply jobs' },
                 page: { type: 'integer', description: 'Page number', default: 1 },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum results (default: 10)', default: 10 },
               },
               required: [],
@@ -422,7 +422,7 @@ class LinkedInAPIMCPServer {
               type: 'object',
               properties: {
                 url: { type: 'string', description: 'LinkedIn post URL (required)' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
               },
               required: ['url'],
             },
@@ -445,7 +445,7 @@ class LinkedInAPIMCPServer {
                 sortBy: { type: 'string', description: 'Sort by: relevance or date', enum: ['relevance', 'date'] },
                 page: { type: 'integer', description: 'Page number', default: 1 },
                 paginationToken: { type: 'string', description: 'Pagination token' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum results (default: 10)', default: 10 },
               },
               required: [],
@@ -461,7 +461,7 @@ class LinkedInAPIMCPServer {
                 sortBy: { type: 'string', description: 'Sort by: relevance or date', enum: ['relevance', 'date'] },
                 page: { type: 'integer', description: 'Page number', default: 1 },
                 paginationToken: { type: 'string', description: 'Pagination token' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum comments (default: 10)', default: 10 },
               },
               required: ['post'],
@@ -475,7 +475,7 @@ class LinkedInAPIMCPServer {
               properties: {
                 post: { type: 'string', description: 'LinkedIn post URL (required)' },
                 page: { type: 'integer', description: 'Page number', default: 1 },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum reactions (default: 10)', default: 10 },
               },
               required: ['post'],
@@ -489,7 +489,7 @@ class LinkedInAPIMCPServer {
               properties: {
                 url: { type: 'string', description: 'LinkedIn group URL' },
                 groupId: { type: 'string', description: 'LinkedIn group ID' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
               },
               required: [],
             },
@@ -502,7 +502,7 @@ class LinkedInAPIMCPServer {
               properties: {
                 search: { type: 'string', description: 'Keywords to search' },
                 page: { type: 'integer', description: 'Page number', default: 1 },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum results (default: 10)', default: 10 },
               },
               required: ['search'],
@@ -515,7 +515,7 @@ class LinkedInAPIMCPServer {
               type: 'object',
               properties: {
                 search: { type: 'string', description: 'Location text to search' },
-                raw_data_save_dir: { type: 'string', description: 'Directory path to save raw JSON response' },
+                save_dir: { type: 'string', description: 'Directory to save cleaned JSON data' },
                 max_items: { type: 'integer', description: 'Maximum results (default: 10)', default: 10 },
               },
               required: ['search'],
@@ -579,7 +579,7 @@ class LinkedInAPIMCPServer {
     }
   }
 
-  private saveRawData(data: any, dir: string, toolName: string): string {
+  private saveData(data: any, dir: string, toolName: string): string {
     try {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
@@ -597,17 +597,11 @@ class LinkedInAPIMCPServer {
   private formatResponse(
     cleanedData: any,
     options: {
-      rawData?: any;
-      rawDataSaveDir?: string;
+      saveDir?: string;
       toolName?: string;
       pagination?: any;
     }
   ): CallToolResult {
-    let savedPath = '';
-    if (options.rawDataSaveDir && options.rawData && options.toolName) {
-      savedPath = this.saveRawData(options.rawData, options.rawDataSaveDir, options.toolName);
-    }
-
     const output: any = { data: cleanedData };
     if (options.pagination) {
       output.pagination = {
@@ -617,10 +611,15 @@ class LinkedInAPIMCPServer {
       };
     }
 
+    let savedPath = '';
+    if (options.saveDir && options.toolName) {
+      savedPath = this.saveData(output, options.saveDir, options.toolName);
+    }
+
     const toonString = encode(output);
     let text = toonString;
     if (savedPath) {
-      text += `\n\n[Raw JSON saved to: ${savedPath}]`;
+      text += `\n\n[Cleaned data saved to: ${savedPath}]`;
     }
 
     return {
@@ -652,8 +651,8 @@ class LinkedInAPIMCPServer {
     }
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_profile',
     });
   }
@@ -676,8 +675,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanProfileSearchResult);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'search_profiles',
       pagination: data.pagination,
     });
@@ -701,8 +700,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanPost);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_profile_posts',
       pagination: data.pagination,
     });
@@ -725,8 +724,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanComment);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_profile_comments',
       pagination: data.pagination,
     });
@@ -748,8 +747,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanReaction);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_profile_reactions',
       pagination: data.pagination,
     });
@@ -770,8 +769,8 @@ class LinkedInAPIMCPServer {
     const cleaned = DataCleaners.cleanCompany(data.element);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_company',
     });
   }
@@ -788,8 +787,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanCompany);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'search_companies',
       pagination: data.pagination,
     });
@@ -813,8 +812,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanPost);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_company_posts',
       pagination: data.pagination,
     });
@@ -834,8 +833,8 @@ class LinkedInAPIMCPServer {
     const cleaned = DataCleaners.cleanJob(data.element);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_job',
     });
   }
@@ -863,8 +862,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanJobSearchResult);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'search_jobs',
       pagination: data.pagination,
     });
@@ -876,8 +875,8 @@ class LinkedInAPIMCPServer {
     const cleaned = DataCleaners.cleanPost(data.element);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_post',
     });
   }
@@ -902,8 +901,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanPost);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'search_posts',
       pagination: data.pagination,
     });
@@ -920,8 +919,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanComment);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_post_comments',
       pagination: data.pagination,
     });
@@ -936,8 +935,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanReaction);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_post_reactions',
       pagination: data.pagination,
     });
@@ -957,8 +956,8 @@ class LinkedInAPIMCPServer {
     const cleaned = DataCleaners.cleanGroup(data.element);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'get_group',
     });
   }
@@ -972,8 +971,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanGroup);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'search_groups',
       pagination: data.pagination,
     });
@@ -986,8 +985,8 @@ class LinkedInAPIMCPServer {
     const cleaned = (data.elements || []).slice(0, maxItems).map(DataCleaners.cleanGeoId);
 
     return this.formatResponse(cleaned, {
-      rawData: data,
-      rawDataSaveDir: args.raw_data_save_dir,
+      
+      saveDir: args.save_dir,
       toolName: 'search_geo_id',
     });
   }
